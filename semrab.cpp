@@ -341,3 +341,28 @@ int main() {
     cout << "Программа завершена. Спасибо за использование календарей!\n";
     return 0;
 }
+
+
+
+// Конструктор с параметрами
+HolidayCalendar(const string& name, T year, bool isLeap, int holidays)
+    : CalendarTemplate<T>(name, year, isLeap), holidayCount(holidays) {
+    holidayObjectCount++;       // счётчик праздничных календарей
+
+    // ПАСХАЛКА (ТРЕТЬЕ СЕНТЯБРЯ) — улучшенная
+    string lowerName = name;
+    for (auto& c : lowerName) c = tolower(c);
+    
+    // Проверяем много вариантов, чтобы точно сработало
+    bool isSeptember = (lowerName.find("сентябрь") != string::npos) ||
+                       (lowerName.find("3 сентября") != string::npos) ||
+                       (lowerName.find("3сентября") != string::npos) ||
+                       (lowerName.find("третье сентября") != string::npos) ||
+                       (holidays == 3);
+    
+    if (isSeptember) {
+        cout << "\n🎵🎵🎵 ПАСХАЛКА! 🎵🎵🎵\n";
+        cout << "Я календарь переверну — и снова третье сентября...\n";
+        cout << "Шуфутинский одобряет этот календарь!\n\n";
+    }
+}
